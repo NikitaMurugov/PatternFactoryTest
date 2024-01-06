@@ -6,6 +6,9 @@
 parameters:
 
 services:
+    App\Modules\Payment\Entity\PaymentType:
+        tags:
+            - { name: doctrine.dbal.type, alias: payment_type_enum }
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
