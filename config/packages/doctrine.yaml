@@ -21,6 +21,18 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+            Order:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Modules/Order/Entity'
+                prefix: 'App\Modules\Order\Entity'
+                alias: Order
+            Payment:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Modules/Payment/Entity'
+                prefix: 'App\Modules\Payment\Entity'
+                alias: Payment
 
 when@test:
     doctrine:
