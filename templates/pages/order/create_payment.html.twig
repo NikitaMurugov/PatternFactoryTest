@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h2>Оплата заказа #{{ order.id }}. К оплате {{ order.totalPrice }} руб</h2>
+        <form action="{{ path('order_payment_submit', {orderId: order.id}) }}" method="post" class="col mb-3 p-4">
+            <label for="price" class="form-label">
+                Сколько списать суммы с заказа?
+            </label>
+            <input type="number"
+                class="form-control form-control-rounded mb-2"
+                id="price"
+                name="price"
+                placeholder="1000 рублей"
+                {% if app.session.get('totalPrice') %} value="{{ app.session.get('totalPrice') }}" {% endif %}
+            >
+            <div class="mb-3">
+                <label class="form-label">Тип оплаты</label>
+                <select type="text" class="form-select tomselected ts-hidden-accessible form-control-rounded" id="select-users" name='paymentType' tabindex="-1">
+                    {% for key, option in paymentTypes %}
+                        <option value="{{ key }}">{{ option }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <a href="{{ path('index_page') }}" class="btn btn-outline-secondary btn-pill w-100">
+                        Отмена
+                    </a>
+                </div>
+                <div class="col-6">
+                    <button type="submit" class="btn btn-success btn-pill w-100">
+                         Провести оплату по заказу
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

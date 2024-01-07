@@ -1,0 +1,33 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <form action="{{ path('order_submit') }}" method="post" class="col mb-3 p-4">
+                <label for="totalPrice" class="form-label">
+                    Общая сумма заказа (руб.)
+                </label>
+                <input type="number"
+                        class="form-control form-control-rounded mb-2"
+                        id="totalPrice"
+                        name="totalPrice"
+                        placeholder="1000 рублей"
+                        {% if app.session.get('totalPrice') %} value="{{ app.session.get('totalPrice') }}" {% endif %}
+                >
+
+                <div class="row">
+                    <div class="col-6">
+                        <a href="{{ path('index_page') }}" class="btn btn-outline-secondary btn-pill w-100">
+                            Отмена
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-success btn-pill w-100">
+                            Создать заказ
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

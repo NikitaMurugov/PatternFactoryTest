@@ -26,7 +26,7 @@ final readonly class PaymentService
      * @throws EntityNotFoundException
      * @throws EnumNotSupported
      */
-    public function save(CreatePaymentDTO $createPaymentDTO): void
+    public function save(CreatePaymentDTO $createPaymentDTO): bool
     {
         $order = $this->orderRepository->find($createPaymentDTO->orderId);
 
@@ -49,5 +49,13 @@ final readonly class PaymentService
 
         $this->em->persist($payment);
         $this->em->flush();
+
+        return true;
+    }
+
+    /** @return array<string, string> */
+    public function getListPayTypes(): array
+    {
+        return PayType::getList();
     }
 }

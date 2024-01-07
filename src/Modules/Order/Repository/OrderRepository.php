@@ -6,7 +6,6 @@ namespace App\Modules\Order\Repository;
 
 use App\Modules\Order\Entity\Order;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -28,26 +27,16 @@ final class OrderRepository extends ServiceEntityRepository
 
     /**
      * @return array<array-key, Order>
-     *
-     * @throws NonUniqueResultException
      */
     public function findLatestOrders(int $count = 10): array
     {
-        return $this
-            ->createQueryBuilder('order')
-            ->orderBy('order.createdAt', 'DESC')
-            ->setMaxResults($count)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
+        $query = $this
+            ->createQueryBuilder('o')
+            ->orderBy('o.createdAt', 'DESC')
+            ->setMaxResults($count);
 
-    //    public function findOneBySomeField($value): ?Order
-    //    {
-    //        return $this->createQueryBuilder('o')
-    //            ->andWhere('o.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        return $query
+            ->getQuery()
+            ->getResult();
+    }
 }

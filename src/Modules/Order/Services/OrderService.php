@@ -38,4 +38,9 @@ final readonly class OrderService
     {
         return $this->orderRepository->findLatestOrders($count);
     }
+
+    public function find(int $orderId): ?Order
+    {
+        return $this->orderRepository->find($orderId);
+    }
 }

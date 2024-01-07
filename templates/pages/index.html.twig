@@ -1,0 +1,32 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        {% if orders|length > 0 %}
+            <div class="row">
+            {% for order in orders %}
+                <div class="col-sm-6 col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Номер заказа {{ order.id }}</h3>
+                            <p class="text-secondary">
+                                Дата заказа: {{ order.createdAt|date('Y-m-d') }}
+                                Дата обновления заказа: {{ order.updatedAt|date('Y-m-d') }}
+                            </p>
+                        </div>
+                        <!-- Card footer -->
+                        <div class="card-footer">
+                            <a href="{{ path('order_payment_page', {orderId: order.id}) }}" class="btn btn-primary">Оплатить</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+
+        {% else %}
+                <div class="col-12 text-center p-4 d-flex justify-content-center align-items-center">
+                    <h3>Заказов еще нет, попробуйте сделать один</h3>
+                </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -12,7 +12,13 @@ enum PayType: string
 
     public static function getFromString(string $code): self
     {
-        return self::tryFrom($code) ?? self::UNDEFINED;
+        foreach (self::cases() as $status) {
+            if (in_array($code, [$status->name, $status->value])) {
+                return $status;
+            }
+        }
+
+        return self::UNDEFINED;
     }
 
     /** @return array<string, string> */

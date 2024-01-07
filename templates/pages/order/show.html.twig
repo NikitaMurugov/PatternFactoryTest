@@ -1,0 +1,27 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <div class="container pt-4">
+            <h2>СТРАНИЦА ЗАКАЗА #{{ order.id }}</h2>
+            <span class="badge badge-danger">от {{ order.createdAt|date('d.m.Y') }} (цена: {{ order.totalPrice }} руб.)</span>
+        <h4>Оплаты по заказу:</h4>
+        <div class="row">
+            {% for payment in order.payments %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                Оплата от {{ payment.createdAt|date('d.m.Y') }}
+                            </div>
+                            <div class="card-text">
+                                Внесенные средства: <b>{{ payment.price }} руб.</b>
+                                <br>
+                                Тип оплаты:  <span class="badge badge-success">{{ payment.type.value }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

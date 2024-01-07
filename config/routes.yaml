@@ -3,3 +3,29 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+index_page:
+    path: /
+    controller: App\Controller\IndexController::index
+
+order_create:
+    path: /order/create
+    controller: App\Controller\OrderController::create
+
+order_submit:
+    methods: [POST]
+    path: /order/submit
+    controller: App\Controller\OrderController::submit
+
+order_show:
+    path: /order/{orderId}
+    controller: App\Controller\OrderController::show
+
+order_payment_page:
+    path: /order/{orderId}/payment
+    controller: App\Controller\PaymentController::paymentPage
+
+order_payment_submit:
+    methods: [ POST ]
+    path: /order/{orderId}/payment/submit
+    controller: App\Controller\PaymentController::submitPayment
